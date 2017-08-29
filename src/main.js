@@ -15,7 +15,7 @@ import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min
 import Framework7Theme from 'framework7/dist/css/framework7.material.min.css'
 import Framework7ThemeColors from 'framework7/dist/css/framework7.material.colors.min.css'
 */
-
+import Css from '../static/css/style.css'
 // Import Routes
 import Routes from './routes.js'
 

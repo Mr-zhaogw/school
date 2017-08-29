@@ -1,0 +1,20 @@
+i.icon.icon-back{
+  background: url('../imgs/icon/back.png');
+  background-size: cover;
+  width:16px;
+}
+.navbar .right a{
+	color:#fff;
+}
+.content-block{
+	margin:50px 0;
+	padding:0;
+}
+.content-block-inner{
+	margin-left: 0px;
+}
+.blank{
+	height: 15px;
+	width:100%;
+	background:#f2f2f2;
+}

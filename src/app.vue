@@ -14,8 +14,24 @@
             <!-- <f7-navbar title="Awesome App"></f7-navbar> -->
             <!-- Toolbar-->
             <f7-toolbar>
-              <f7-link>Link 1</f7-link>
-              <f7-link>Link 2</f7-link>
+              <f7-grid>
+                <f7-col>
+                  <i><img src="../static/imgs/icon/icon1.png"></i>
+                  <p>首页</p>
+                </f7-col>
+                <f7-col>
+                  <i><img src="../static/imgs/icon/icon1.png"></i>
+                  <p>服务</p>
+                </f7-col>
+                <f7-col>
+                  <i><img src="../static/imgs/icon/icon1.png"></i>
+                  <p>互动</p>
+                </f7-col>
+                <f7-col>
+                  <i><img src="../static/imgs/icon/icon1.png"></i>
+                  <p>我的</p>
+                </f7-col>
+              </f7-grid>
             </f7-toolbar>
             <!-- Page Content -->
             <div class="banner">
@@ -28,16 +44,22 @@
             <div class="nav">
               <f7-grid>
                 <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>团队管理</p>
+                  <f7-link href="/teamManage">
+                    <i><img src="../static/imgs/icon/icon1.png"></i>
+                    <p>团队管理</p>
+                  </f7-link>
                 </f7-col>
                 <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>工商服务</p>
+                  <f7-link href="#1">
+                    <i><img src="../static/imgs/icon/icon1.png"></i>
+                    <p>工商服务</p>
+                  </f7-link>
                 </f7-col>
                 <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>全景地图</p>
+                  <f7-link href="#1">
+                    <i><img src="../static/imgs/icon/icon1.png"></i>
+                    <p>全景地图</p>
+                  </f7-link>
                 </f7-col>
               </f7-grid>
             </div>
@@ -146,10 +168,8 @@
     },
     mounted:function(){
         var self = this;
-        console.log(self);
         this.$nextTick(function(){         
          self.f7 = self.$f7Router.framework7;
-         console.log(self.f7);
           self.companylist = self.f7.swiper('.swiper-3', {
             pagination:'.swiper-3 .swiper-pagination',
             spaceBetween: 10,
@@ -191,6 +211,10 @@
   }
   .nav .row .col-auto{
     text-align: center;
+  }
+  .nav .row .col-auto a{
+    display: block;
+    color:#000;
   }
   .nav .row .col-auto i{
     width:40%;
@@ -307,5 +331,24 @@
   }
   .notice .nt-box p.time span:last-child{
     float: right;
+  }
+  .toolbar .row{
+    width:100%;
+  }
+  .toolbar .row .col-auto{
+    text-align: center;
+  }
+  .toolbar i{
+    width:1.7rem;
+    height: 2rem;
+    display: inline-block;
+  }
+  .toolbar .row .col-auto p{
+    font-size: .8rem;
+    color:#6b6969;
+  }
+  .toolbar i img{
+    width:100%;
+    vertical-align: -15px;
   }
 </style>
