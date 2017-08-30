@@ -1,3 +1,6 @@
+ul li{
+  list-style: none;
+}
 i.icon.icon-back{
   background: url('../imgs/icon/back.png');
   background-size: cover;
@@ -17,4 +20,29 @@ i.icon.icon-back{
 	height: 15px;
 	width:100%;
 	background:#f2f2f2;
+}
+
+ul.label{
+  padding-left: 0;
+  margin-top:5px;
+}
+ul.label li{
+  float: left;
+  font-size: .6rem;
+  margin-right: 5px;
+  border-radius: 3px;
+  padding:2px 3px 0;
+}
+ul.label li:nth-of-type(1){
+  color:#0097fb;
+  border:1px solid #0097fb;
+}
+ul.label li:nth-of-type(2){
+  color:#f7b633;
+  border:1px solid #f7b633;
+}
+ul.label li:nth-of-type(3){
+  color:#fb936d;
+  border:1px solid #fb936d;
+  margin-right: 0
 }

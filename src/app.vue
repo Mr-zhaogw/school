@@ -50,7 +50,7 @@
                   </f7-link>
                 </f7-col>
                 <f7-col>
-                  <f7-link href="#1">
+                  <f7-link href="/businessServices">
                     <i><img src="../static/imgs/icon/icon1.png"></i>
                     <p>工商服务</p>
                   </f7-link>
@@ -66,58 +66,74 @@
             <div class="enterCompany">
               <div class="head title fn-clear">
                 <span><i><img src="../static/imgs/icon/icon2.png"></i>入驻企业</span>
-                <a class="more"><span>更多</span> ></a>
+                <a class="more" href="/companyList"><span>更多</span> ></a>
               </div>
               <div class="companyList">
                 <div class="swiper-container swiper-3">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                     <div class="swiper-slide">
-                      <div class="img">
-                        <img src="../static/imgs/timg.jpg">
-                        <div class="cover">小米科技</div>
-                      </div>
+                      <f7-link href="/companyDetail">
+                        <div class="img">
+                          <img src="../static/imgs/timg.jpg">
+                          <div class="cover">小米科技</div>
+                        </div>
+                      </f7-link>
                     </div>
                   </div>
                 </div>
@@ -126,31 +142,35 @@
             <div class="notice">
               <div class="head title fn-clear">
                 <span><i><img src="../static/imgs/icon/icon2.png"></i>园区资讯</span>
-                <a class="more"><span>更多</span> ></a>
+                <a class="more" href="/newsList"><span>更多</span> ></a>
               </div>
               <div class="nt-box1 nt-box">
-                <p class="title">
-                  园区最新通告在这里查看
-                </p>
-                <div class="img"><img src="../static/imgs/timg.jpg"></div>
-                <p class="time fn-clear">
-                  <span>2017-08-10</span>
-                  <span>浏览量：2302人</span>
-                </p>
+                <f7-link href="/newsDetail">
+                  <p class="title">
+                    园区最新通告在这里查看
+                  </p>
+                  <div class="img"><img src="../static/imgs/timg.jpg"></div>
+                  <p class="time fn-clear">
+                    <span>2017-08-10</span>
+                    <span>浏览量：2302人</span>
+                  </p>
+                </f7-link>
               </div>
               <div class="nt-box2 nt-box">
-                <p class="title">
-                  园区最新通告在这里查看
-                </p>
-                <div class="img">
-                  <img src="../static/imgs/timg.jpg">
-                  <img src="../static/imgs/timg.jpg">
-                  <img src="../static/imgs/timg.jpg">
-                </div>
-                <p class="time fn-clear">
-                  <span>2017-08-10</span>
-                  <span>浏览量：2302人</span>
-                </p>
+                <f7-link href="/newsDetail">
+                  <p class="title">
+                    园区最新通告在这里查看
+                  </p>
+                  <div class="img">
+                    <img src="../static/imgs/timg.jpg">
+                    <img src="../static/imgs/timg.jpg">
+                    <img src="../static/imgs/timg.jpg">
+                  </div>
+                  <p class="time fn-clear">
+                    <span>2017-08-10</span>
+                    <span>浏览量：2302人</span>
+                  </p>
+                </f7-link>
               </div>
             </div>
           </f7-page>
@@ -299,6 +319,9 @@
   .notice .nt-box {
     padding:0 0 10px;
     border-bottom: 1px solid #e4e4e4
+  }
+  .notice .nt-box a p{
+    color:#282828;
   }
   .notice .nt-box:last-child{
     border:none;
