@@ -1,5 +1,9 @@
 export default [
   {
+      path: '/home/',
+      component: require('./pages/home.vue')
+  },
+  {
       path: '/teamManage/',
       component: require('./pages/teamManage.vue')
   },
@@ -22,6 +26,10 @@ export default [
   {
       path: '/newsDetail/',
       component: require('./pages/newsDetail.vue')
+  },
+  {
+      path: '/personalCenter/',
+      component: require('./pages/personalCenter.vue')
   },
   // {
   //     path: '/dynamic-route/blog/:blogId/post/:postId/',

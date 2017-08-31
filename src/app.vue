@@ -5,182 +5,47 @@
     <!-- Views -->
     <f7-views>
     <!-- Your main view, should have "main" prop -->
-      <f7-view main>
+      <f7-view main toolbar-fixed>
         <!-- Pages container, because we use fixed navbar and toolbar, it has additional appropriate props -->
-        <f7-pages toolbar-fixed>
+        <f7-pages>
           <!-- Initial Page -->
           <f7-page>
-            <!-- Top Navbar-->
-            <!-- <f7-navbar title="Awesome App"></f7-navbar> -->
-            <!-- Toolbar-->
-            <f7-toolbar>
-              <f7-grid>
-                <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>首页</p>
-                </f7-col>
-                <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>服务</p>
-                </f7-col>
-                <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>互动</p>
-                </f7-col>
-                <f7-col>
-                  <i><img src="../static/imgs/icon/icon1.png"></i>
-                  <p>我的</p>
-                </f7-col>
-              </f7-grid>
-            </f7-toolbar>
-            <!-- Page Content -->
-            <div class="banner">
-              <f7-swiper pagination :params="{speed:500}">
-                <f7-swiper-slide><img src="../static/imgs/banner.png"></f7-swiper-slide>
-                <f7-swiper-slide><img src="../static/imgs/banner.png"></f7-swiper-slide>
-                <f7-swiper-slide><img src="../static/imgs/banner.png"></f7-swiper-slide>
-              </f7-swiper>
-            </div>
-            <div class="nav">
-              <f7-grid>
-                <f7-col>
-                  <f7-link href="/teamManage">
-                    <i><img src="../static/imgs/icon/icon1.png"></i>
-                    <p>团队管理</p>
-                  </f7-link>
-                </f7-col>
-                <f7-col>
-                  <f7-link href="/businessServices">
-                    <i><img src="../static/imgs/icon/icon1.png"></i>
-                    <p>工商服务</p>
-                  </f7-link>
-                </f7-col>
-                <f7-col>
-                  <f7-link href="#1">
-                    <i><img src="../static/imgs/icon/icon1.png"></i>
-                    <p>全景地图</p>
-                  </f7-link>
-                </f7-col>
-              </f7-grid>
-            </div>
-            <div class="enterCompany">
-              <div class="head title fn-clear">
-                <span><i><img src="../static/imgs/icon/icon2.png"></i>入驻企业</span>
-                <a class="more" href="/companyList"><span>更多</span> ></a>
-              </div>
-              <div class="companyList">
-                <div class="swiper-container swiper-3">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                    <div class="swiper-slide">
-                      <f7-link href="/companyDetail">
-                        <div class="img">
-                          <img src="../static/imgs/timg.jpg">
-                          <div class="cover">小米科技</div>
-                        </div>
-                      </f7-link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="notice">
-              <div class="head title fn-clear">
-                <span><i><img src="../static/imgs/icon/icon2.png"></i>园区资讯</span>
-                <a class="more" href="/newsList"><span>更多</span> ></a>
-              </div>
-              <div class="nt-box1 nt-box">
-                <f7-link href="/newsDetail">
-                  <p class="title">
-                    园区最新通告在这里查看
-                  </p>
-                  <div class="img"><img src="../static/imgs/timg.jpg"></div>
-                  <p class="time fn-clear">
-                    <span>2017-08-10</span>
-                    <span>浏览量：2302人</span>
-                  </p>
-                </f7-link>
-              </div>
-              <div class="nt-box2 nt-box">
-                <f7-link href="/newsDetail">
-                  <p class="title">
-                    园区最新通告在这里查看
-                  </p>
-                  <div class="img">
-                    <img src="../static/imgs/timg.jpg">
-                    <img src="../static/imgs/timg.jpg">
-                    <img src="../static/imgs/timg.jpg">
-                  </div>
-                  <p class="time fn-clear">
-                    <span>2017-08-10</span>
-                    <span>浏览量：2302人</span>
-                  </p>
-                </f7-link>
-              </div>
-            </div>
+            <home></home>
           </f7-page>
         </f7-pages>
+        <div class="toolbar tabbar tabbar-labels">
+          <div class="toolbar-inner">
+              <a href="#tab1" class="tab-link active">
+                  <i class="icon demo-icon-1"><img src="../static/imgs/icon/icon1.png"></i>
+                  <span class="tabbar-label">首页</span>
+              </a>
+              <a href="#tab2" class="tab-link">
+                  <i class="icon demo-icon-2"><img src="../static/imgs/icon/icon1.png"></i>
+                  <span class="tabbar-label">服务</span>
+              </a>
+              <a href="#tab3" class="tab-link">
+                  <i class="icon demo-icon-3"><img src="../static/imgs/icon/icon1.png"></i>
+                  <span class="tabbar-label">互动</span>
+              </a>
+              <a href="/personalCenter" class="tab-link">
+                  <i class="icon demo-icon-4"><img src="../static/imgs/icon/icon1.png"></i>
+                  <span class="tabbar-label">我的</span>
+              </a>
+          </div>
+      </div>
       </f7-view>
     </f7-views>
   </div>
 </template>
 <script>
+import Home from './pages/home.vue'
+import Bottom from './pages/bottom'
   export default{
+    name:'app',
+     components:{
+      Home,
+      Bottom
+     },
     data:function(){
       return{
 
@@ -190,6 +55,8 @@
         var self = this;
         this.$nextTick(function(){         
          self.f7 = self.$f7Router.framework7;
+         console.log(self.f7);
+         self.f7.mainView.loadPage({url:'/home'});
           self.companylist = self.f7.swiper('.swiper-3', {
             pagination:'.swiper-3 .swiper-pagination',
             spaceBetween: 10,
@@ -355,23 +222,5 @@
   .notice .nt-box p.time span:last-child{
     float: right;
   }
-  .toolbar .row{
-    width:100%;
-  }
-  .toolbar .row .col-auto{
-    text-align: center;
-  }
-  .toolbar i{
-    width:1.7rem;
-    height: 2rem;
-    display: inline-block;
-  }
-  .toolbar .row .col-auto p{
-    font-size: .8rem;
-    color:#6b6969;
-  }
-  .toolbar i img{
-    width:100%;
-    vertical-align: -15px;
-  }
+  
 </style>
