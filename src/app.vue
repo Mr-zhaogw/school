@@ -12,7 +12,7 @@
           </f7-nav-left>
           <f7-nav-center sliding>{{navbarTitle}}</f7-nav-center>
           <f7-nav-right>
-            <f7-link open-popup="#publisherPopup" icon="iconfont icon-feedback3" icon-size="22" v-show="activedTab === 'home'"></f7-link>
+            <f7-link v-show="activedTab === 'interact'"><i><img src="../static/imgs/icon/add.png"></i></f7-link>
           </f7-nav-right>
         </f7-navbar>
         <f7-pages>
@@ -270,5 +270,12 @@ import Interact from './pages/interact.vue'
   .notice .nt-box p.time span:last-child{
     float: right;
   }
-  
+  .navbar .right a i{
+    width:24px;
+    height: 24px;
+  }
+  .navbar .right a img{
+    width: 100%;
+    vertical-align: 3px;
+  }
 </style>

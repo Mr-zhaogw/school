@@ -65,3 +65,9 @@ html.ios-gt-8 .navbar .center{
 .list-block{
   margin: 0
 }
+.navbar .center{
+  color:#fff;
+}
+i img{
+  width:100%;
+}
