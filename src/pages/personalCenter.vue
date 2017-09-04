@@ -1,102 +1,98 @@
 <template>
-  <f7-page class="personalCenter">
-    <f7-navbar title=" " back-link="我的资料" sliding></f7-navbar>
-    <f7-toolbar>
-      <bottom></bottom>
-    </f7-toolbar>
-    <f7-block>
-      <div class="blank"></div>
-      <div class="line1">
-        <div class="list-block">
-          <ul>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner noIcon myHead">
-                  <div class="item-title">头像</div>
-                  <div class="item-after">
-                    <div class="headImg">
-                      <img src="../../static/imgs/p.png">
+    <div class="personalCenter">
+      <f7-block>
+        <div class="blank"></div>
+        <div class="line1">
+          <div class="list-block">
+            <ul>
+              <li>
+                <a href="#" class="item-link item-content">
+                  <div class="item-inner noIcon myHead">
+                    <div class="item-title">头像</div>
+                    <div class="item-after">
+                      <div class="headImg">
+                        <img src="../../static/imgs/p.png">
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner noIcon">
-                  <div class="item-title">名字</div>
-                  <div class="item-after">周先生</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner noIcon">
-                  <div class="item-title">联系电话</div>
-                  <div class="item-after">13888888888</div>
-                </div>
-              </a>
-            </li>
-          </ul>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="item-link item-content">
+                  <div class="item-inner noIcon">
+                    <div class="item-title">名字</div>
+                    <div class="item-after">周先生</div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="item-link item-content">
+                  <div class="item-inner noIcon">
+                    <div class="item-title">联系电话</div>
+                    <div class="item-after">13888888888</div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="blank"></div>
-      <div class="line2">
-        <div class="list-block">
-          <ul>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">资料修改</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">账号安全</div>
-                </div>
-              </a>
-            </li>
-          </ul>
+        <div class="blank"></div>
+        <div class="line2">
+          <div class="list-block">
+            <ul>
+              <li>
+                <a href="#" class="item-link item-content">
+                  <div class="item-inner">
+                    <div class="item-title">资料修改</div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/safety" class="item-link item-content">
+                  <div class="item-inner">
+                    <div class="item-title">账号安全</div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="blank"></div>
-      <div class="line1">
-        <div class="list-block">
-          <ul>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">常见问题</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner noIcon">
-                  <div class="item-title">客服电话</div>
-                  <div class="item-after phone">400-4090-4000</div>
-                </div>
-              </a>
-            </li>
-          </ul>
+        <div class="blank"></div>
+        <div class="line1">
+          <div class="list-block">
+            <ul>
+              <li>
+                <a href="/faq" class="item-link item-content">
+                  <div class="item-inner">
+                    <div class="item-title">常见问题</div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="item-link item-content">
+                  <div class="item-inner noIcon">
+                    <div class="item-title">客服电话</div>
+                    <div class="item-after phone">400-4090-4000</div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="btn">
-        <a href="#" class="button active">退出登录</a>
-      </div>
-    </f7-block>
-  </f7-page>
+        <div class="btn">
+          <a href="#" class="button active">退出登录</a>
+        </div>
+      </f7-block>
+    </div>
 </template>
 
 <script>
-import Bottom from '../pages/bottom.vue'
+// import Bottom from '../pages/bottom.vue'
 export default {
-  name:'personalCenter',
-  components:{
-    Bottom
-  },
+  name:'personalCenter'
+  // components:{
+  //   Bottom
+  // },
 }
 </script>
 <style>

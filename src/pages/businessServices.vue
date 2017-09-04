@@ -37,7 +37,7 @@
             <li>
               <a href="#" class="item-link item-content">
                 <div class="item-inner">
-                  <div class="item-title">工商资料办理规则工商资料办理规则工商资料办理规则</div>
+                  <div class="item-title">工商资料办理规则</div>
                   <div class="item-after">2017-8-10</div>
                 </div>
               </a>

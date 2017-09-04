@@ -1,62 +1,99 @@
 <template>
-  <div id="app">
-  <!-- Status bar overlay for full screen mode (Cordova or PhoneGap) -->
+    <div id="app">
+
+    <!-- Statusbar -->
     <f7-statusbar></f7-statusbar>
-    <!-- Views -->
+
+    <!-- Main Views -->
     <f7-views>
-    <!-- Your main view, should have "main" prop -->
-      <f7-view main toolbar-fixed>
-        <!-- Pages container, because we use fixed navbar and toolbar, it has additional appropriate props -->
+      <f7-view id="main-view" navbar-fixed :dynamic-navbar="true" main>
+        <f7-navbar>
+          <f7-nav-left>
+          </f7-nav-left>
+          <f7-nav-center sliding>{{navbarTitle}}</f7-nav-center>
+          <f7-nav-right>
+            <f7-link open-popup="#publisherPopup" icon="iconfont icon-feedback3" icon-size="22" v-show="activedTab === 'home'"></f7-link>
+          </f7-nav-right>
+        </f7-navbar>
         <f7-pages>
-          <!-- Initial Page -->
-          <f7-page>
-            <home></home>
+          <f7-page toolbar-fixed navbar-fixed>
+            <div class="toolbar tabbar tabbar-labels">
+              <div class="toolbar-inner">
+                  <a href="#home" class="tab-link active">
+                      <i class="icon demo-icon-1"><img src="../static/imgs/icon/icon1.png"></i>
+                      <span class="tabbar-label">首页</span>
+                  </a>
+                  <a href="#serve" class="tab-link">
+                      <i class="icon demo-icon-2"><img src="../static/imgs/icon/icon1.png"></i>
+                      <span class="tabbar-label">服务</span>
+                  </a>
+                  <a href="#interact" class="tab-link">
+                      <i class="icon demo-icon-3"><img src="../static/imgs/icon/icon1.png"></i>
+                      <span class="tabbar-label">互动</span>
+                  </a>
+                  <a href="#personalCenter" class="tab-link">
+                      <i class="icon demo-icon-4"><img src="../static/imgs/icon/icon1.png"></i>
+                      <span class="tabbar-label">我的</span>
+                  </a>
+              </div>
+            </div>
+            <f7-tabs>
+              <f7-tab id="home" active @tab:show="tabActived('home')">
+                <home></home>  
+              </f7-tab>
+              <f7-tab id="serve" @tab:show="tabActived('serve')">
+                <serve></serve>
+              </f7-tab>
+              <f7-tab id="interact" @tab:show="tabActived('interact')">
+                <interact></interact>
+              </f7-tab>
+              <f7-tab id="personalCenter" @tab:show="tabActived('personalCenter')">
+                <personalCenter></personalCenter>
+              </f7-tab>
+            </f7-tabs>
           </f7-page>
         </f7-pages>
-        <div class="toolbar tabbar tabbar-labels">
-          <div class="toolbar-inner">
-              <a href="#tab1" class="tab-link active">
-                  <i class="icon demo-icon-1"><img src="../static/imgs/icon/icon1.png"></i>
-                  <span class="tabbar-label">首页</span>
-              </a>
-              <a href="#tab2" class="tab-link">
-                  <i class="icon demo-icon-2"><img src="../static/imgs/icon/icon1.png"></i>
-                  <span class="tabbar-label">服务</span>
-              </a>
-              <a href="#tab3" class="tab-link">
-                  <i class="icon demo-icon-3"><img src="../static/imgs/icon/icon1.png"></i>
-                  <span class="tabbar-label">互动</span>
-              </a>
-              <a href="/personalCenter" class="tab-link">
-                  <i class="icon demo-icon-4"><img src="../static/imgs/icon/icon1.png"></i>
-                  <span class="tabbar-label">我的</span>
-              </a>
-          </div>
-      </div>
       </f7-view>
     </f7-views>
   </div>
 </template>
 <script>
 import Home from './pages/home.vue'
-import Bottom from './pages/bottom'
+import PersonalCenter from './pages/personalCenter.vue'
+import Serve from './pages/serve.vue'
+import Interact from './pages/interact.vue'
   export default{
     name:'app',
      components:{
       Home,
-      Bottom
+      PersonalCenter,
+      Serve,
+      Interact
      },
     data:function(){
       return{
-
+        activedTab: 'home'
+      }
+    },
+    computed: {
+      navbarTitle() {
+        switch(this.activedTab) {
+        case 'home':
+          return '首页'
+        case 'serve':
+          return '服务'
+        case 'interact':
+          return '互动'
+        case 'personalCenter':
+          return '我的资料'
+        }
       }
     },
     mounted:function(){
         var self = this;
         this.$nextTick(function(){         
          self.f7 = self.$f7Router.framework7;
-         console.log(self.f7);
-         self.f7.mainView.loadPage({url:'/home'});
+         // self.f7.mainView.loadPage({url:'/home'});
           self.companylist = self.f7.swiper('.swiper-3', {
             pagination:'.swiper-3 .swiper-pagination',
             spaceBetween: 10,
@@ -64,6 +101,11 @@ import Bottom from './pages/bottom'
           });
         })
     },
+    methods:{
+        tabActived(tab) {
+          this.activedTab = tab
+        }
+    }
   }
 </script>
 <style>
@@ -71,6 +113,12 @@ import Bottom from './pages/bottom'
     height: 9rem;
     background:#fff;
   }
+  /*.noNavbar{
+    display: none;
+  }
+  .noNavbar.toolbar-fixed .page-content{
+    padding-top:0;
+  }*/
   .banner .swiper-container{
     height: 9rem;
   }

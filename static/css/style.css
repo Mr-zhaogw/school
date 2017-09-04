@@ -46,3 +46,22 @@ ul.label li:nth-of-type(3){
   border:1px solid #fb936d;
   margin-right: 0
 }
+.navbar-fixed .page-content{
+  padding-top:50px;
+}
+.content-block{
+  margin: 0
+}
+html.ios-gt-8 .navbar .center{
+  font-weight: 500;
+  color:#fff;
+}
+.padding-l-r{
+  padding:0 15px;
+}
+.navbar:after{
+  height: 0px;
+}
+.list-block{
+  margin: 0
+}

@@ -1,12 +1,5 @@
 <template>
-  <f7-page class="home">
-    <!-- Top Navbar-->
-    <!-- <f7-navbar title="Awesome App"></f7-navbar> -->
-    <!-- Toolbar-->
-    <f7-toolbar toolbar tabbar tabbar-labels>
-      <bottom></bottom>
-    </f7-toolbar>
-    <!-- Page Content -->
+  <div class="home">
     <div class="banner">
       <f7-swiper pagination :params="{autoplay:2000, loop:true}">
         <f7-swiper-slide><img src="../../static/imgs/banner.png"></f7-swiper-slide>
@@ -17,7 +10,7 @@
     <div class="nav">
       <f7-grid>
         <f7-col>
-          <f7-link href="/teamManage">
+          <f7-link href="/teamManage/">
             <i><img src="../../static/imgs/icon/icon1.png"></i>
             <p>团队管理</p>
           </f7-link>
@@ -29,7 +22,7 @@
           </f7-link>
         </f7-col>
         <f7-col>
-          <f7-link href="#1">
+          <f7-link href="https://www.baidu.com">
             <i><img src="../../static/imgs/icon/icon1.png"></i>
             <p>全景地图</p>
           </f7-link>
@@ -146,14 +139,18 @@
         </f7-link>
       </div>
     </div>
-  </f7-page>
+  </div>
 </template>
 <script>
 import Bottom from '../pages/bottom.vue'
   export default{
     name:'home',
+    props:['thisTab'],
     components:{
       Bottom
     },
+    methods:{
+
+    }
   }
 </script>
