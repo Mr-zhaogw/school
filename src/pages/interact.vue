@@ -75,6 +75,9 @@
             </div>
           </div>
         </div>
+        <div class="replyBox">
+           <f7-messagebar placeholder="" send-link="发送" @submit="onSubmit" v-model="message" :class="message.length > 0 ?'btnStyle':''"></f7-messagebar>
+        </div>
       </div>
     </f7-block>
   </div>
@@ -84,7 +87,12 @@
     name:'interact',
     data(){
       return{
-
+        message:''
+      }
+    },
+    mounted(){
+      if(this.message.length > 0){
+        console.log(333);
       }
     },
     methods:{
@@ -92,7 +100,13 @@
         var buttons = [
         {
           text:'评论',
-          color:'#0098f9'
+          color:'#0098f9',
+          onClick:function(){
+            var DomT = document.querySelector('.replyBox');
+            var DomTextarea = document.querySelector('.replyBox .messagebar .toolbar-inner textarea');
+            DomT.style.display = 'block';
+            DomTextarea.focus();
+          }
         },
         {
          text:'删除',
@@ -104,6 +118,9 @@
         }
         ];
         self.f7.actions(buttons)
+      },
+      onSubmit(){
+        console.log(this.message.length);
       }
     }
   }
@@ -227,6 +244,43 @@
     border-right: 8px dashed transparent;
     border-bottom: 8px dashed #f3f3f4;
     font-size: 0;
+  }
+  .interact .myspeak .replyBox{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: none;
+  }
+  .interact .myspeak .replyBox .messagebar{
+    background:#ebebeb;
+    border-top:1px solid #d3d3d3;
+    height: 50px !important;
+  }
+  .interact .myspeak .replyBox .messagebar textarea{
+    border:none;
+    background:#ebebeb;
+    border-bottom:1px solid #0098f9;
+    border-radius: 0;
+    padding:6px 10px 3px 5px;
+    line-height: 25px;
+    font-size: .8rem;
+  }
+  .interact .messagebar a.link{
+    display: inline-block;
+    line-height: 30px;
+    border:1px solid #dadada;
+    height: 30px;
+    font-size: .7rem;
+    padding:0 8px;
+    border-radius: 3px;
+    color:#d5d5d5;
+    margin-bottom: 10px;
+  }
+  .interact .btnStyle a.link{
+    background:#1dbd1d;
+    color:#fff;
+    border:none;
   }
   .actions-modal-group{
     margin: 0;
