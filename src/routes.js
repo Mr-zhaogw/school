@@ -43,6 +43,10 @@ export default [
       path: '/atOnceorder/',
       component: require('./pages/service/atOnceorder.vue')
   },
+  {
+      path: '/myTeam/',
+      component: require('./pages/teamManage/myTeam.vue')
+  },
   // {
   //     path: '/personalCenter/',
   //     component: require('./pages/personalCenter.vue')

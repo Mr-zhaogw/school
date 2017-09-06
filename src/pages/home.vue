@@ -10,7 +10,7 @@
     <div class="nav">
       <f7-grid>
         <f7-col>
-          <f7-link href="/teamManage/">
+          <f7-link href="/myTeam/">
             <i><img src="../../static/imgs/icon/icon1.png"></i>
             <p>团队管理</p>
           </f7-link>

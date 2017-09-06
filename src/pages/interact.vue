@@ -91,9 +91,19 @@
       }
     },
     mounted(){
-      if(this.message.length > 0){
-        console.log(333);
-      }
+     var self = this;
+     var DomT = document.querySelector('.replyBox');
+     var bodyDom = document.querySelector('.interact');
+     bodyDom.onclick = function(){
+      DomT.style.display = 'none'
+     },
+     DomT.onclick = function(){
+        if(document.all){
+          window.event.cancelBubble = true;
+        }else{
+          event.stopPropagation(); 
+        }
+     }
     },
     methods:{
       handle(){
