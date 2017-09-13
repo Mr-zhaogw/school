@@ -122,11 +122,11 @@ import utils from '../assets/utils.js'
               // if (response.body.code === 0 && response.body.succeed) {
                   this.companyList = response.body.rows;
                   this.$nextTick(function(){     
-                  self.companylist = self.f7.swiper('.swiper-3', {
-                    pagination:'.swiper-3 .swiper-pagination',
-                    spaceBetween: 10,
-                    slidesPerView: 2.4
-                  });
+                    self.companylist = self.f7.swiper('.swiper-3', {
+                      pagination:'.swiper-3 .swiper-pagination',
+                      spaceBetween: 10,
+                      slidesPerView: 2.4
+                    });
                 })
               // } else {
               //     self.f7.alert('',response.body.msg);

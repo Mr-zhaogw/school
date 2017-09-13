@@ -36,7 +36,19 @@ export default {
   },
   methods:{
     getNewsDetail(){
-      this.$http.post(this.config.domin + 'nengtou/app/news/detail?id='+)
+      // self.f7.showPreloader(' ');
+      this.$http.post(this.config.domin + 'nengtou/app/news/detail?id='+this.newsId).then(response =>{
+          if(response.status === 200 && response.ok){
+            console.log(response);
+            // self.f7.hidePreloader();
+            this.newsList = response.body.rows
+          }else{
+            self.f7.alert('',response.body.msg);
+          }
+        },
+        (response) =>{
+            self.f7.alert('','请求失败');
+        })
     },
   }
 }

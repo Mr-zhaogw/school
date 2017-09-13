@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="myspeak padding-l-r">
-        <div class="speakList fn-clear">
+        <div class="speakList fn-clear" v-for="item in interactList">
           <div class="left">
             <div class="head">
               <img src="../../static/imgs/timg.jpg">
@@ -21,7 +21,7 @@
           </div>
           <div class="right">
             <div class="title">
-              <span>张磊</span>
+              <span>{{item.userName}}</span>
               <span>富士康供应链管理</span>
             </div>
             <div class="text">
@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="speakList fn-clear">
+        <!-- <div class="speakList fn-clear">
           <div class="left">
             <div class="head">
               <img src="../../static/imgs/timg.jpg">
@@ -74,7 +74,7 @@
               <i></i>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="replyBox">
            <f7-messagebar placeholder="" send-link="发送" @submit="onSubmit" v-model="message" :class="message.length > 0 ?'btnStyle':''"></f7-messagebar>
         </div>
@@ -83,11 +83,14 @@
   </div>
 </template>
 <script>
+import { config } from '../assets/config.js'
   export default{
     name:'interact',
     data(){
       return{
-        message:''
+        message:'',
+        config:config,
+        interactList:[],
       }
     },
     mounted(){
@@ -104,6 +107,9 @@
           event.stopPropagation(); 
         }
      }
+     this.$nextTick(function(){
+        this.getInteractList();
+     })
     },
     methods:{
       handle(){
@@ -131,7 +137,22 @@
       },
       onSubmit(){
         console.log(this.message.length);
-      }
+      },
+      getInteractList(){
+        // self.f7.showPreloader(' ');
+        this.$http.post(this.config.domin + 'nengtou/app/interactionuser/list?page=0&pagesize=10').then(response =>{
+            if(response.status === 200 && response.ok){
+              console.log(response);
+              // self.f7.hidePreloader();
+              this.interactList = response.body.rows
+            }else{
+              self.f7.alert('',response.body.msg);
+            }
+          },
+          (response) =>{
+              self.f7.alert('','请求失败');
+          })
+      },
     }
   }
 </script>
