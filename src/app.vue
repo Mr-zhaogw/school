@@ -6,51 +6,41 @@
 
     <!-- Main Views -->
     <f7-views>
-      <f7-view id="main-view" navbar-fixed :dynamic-navbar="true" main>
-        <f7-navbar>
-          <f7-nav-left>
-          </f7-nav-left>
-          <f7-nav-center sliding>{{navbarTitle}}</f7-nav-center>
-          <f7-nav-right>
-            <f7-link v-show="activedTab === 'interact'"><i><img src="../static/imgs/icon/add.png"></i></f7-link>
-          </f7-nav-right>
-        </f7-navbar>
+      <f7-view id="main-view" main>
         <f7-pages>
-          <f7-page toolbar-fixed navbar-fixed>
-            <div class="toolbar tabbar tabbar-labels">
-              <div class="toolbar-inner">
-                  <a href="#home" class="tab-link active">
-                      <i class="icon demo-icon-1"><img src="../static/imgs/icon/icon1.png"></i>
-                      <span class="tabbar-label">首页</span>
-                  </a>
-                  <a href="#serve" class="tab-link">
-                      <i class="icon demo-icon-2"><img src="../static/imgs/icon/icon1.png"></i>
-                      <span class="tabbar-label">服务</span>
-                  </a>
-                  <a href="#interact" class="tab-link">
-                      <i class="icon demo-icon-3"><img src="../static/imgs/icon/icon1.png"></i>
-                      <span class="tabbar-label">互动</span>
-                  </a>
-                  <a href="#personalCenter" class="tab-link">
-                      <i class="icon demo-icon-4"><img src="../static/imgs/icon/icon1.png"></i>
-                      <span class="tabbar-label">我的</span>
-                  </a>
+          <f7-page>
+            <div class="login">
+              <div class="loginBox">
+                <div class="list-block">
+                  <ul>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-input">
+                            <input type="text" placeholder="输入账号" v-model="Mobile">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-input">
+                            <input type="password" placeholder="输入密码" v-model="Password">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <a class="forgetWord">忘记密码？</a>
+                <a href="javascript:" class="button button-fill loginBtn" @click="Login">登录</a>
+                <div class="line">
+                  <span>OR</span>
+                </div> 
+                <a href="#" class="button button-fill onlyLook">随便看看</a> 
               </div>
             </div>
-            <f7-tabs>
-              <f7-tab id="home" active @tab:show="tabActived('home')">
-                <home></home>  
-              </f7-tab>
-              <f7-tab id="serve" @tab:show="tabActived('serve')">
-                <serve></serve>
-              </f7-tab>
-              <f7-tab id="interact" @tab:show="tabActived('interact')">
-                <interact></interact>
-              </f7-tab>
-              <f7-tab id="personalCenter" @tab:show="tabActived('personalCenter')">
-                <personalCenter></personalCenter>
-              </f7-tab>
-            </f7-tabs>
           </f7-page>
         </f7-pages>
       </f7-view>
@@ -58,224 +48,126 @@
   </div>
 </template>
 <script>
-import Home from './pages/home.vue'
-import PersonalCenter from './pages/personalCenter.vue'
-import Serve from './pages/serve.vue'
-import Interact from './pages/interact.vue'
+import { config } from './assets/config.js'
   export default{
     name:'app',
-     components:{
-      Home,
-      PersonalCenter,
-      Serve,
-      Interact
-     },
     data:function(){
       return{
-        activedTab: 'home'
-      }
-    },
-    computed: {
-      navbarTitle() {
-        switch(this.activedTab) {
-        case 'home':
-          return '首页'
-        case 'serve':
-          return '服务'
-        case 'interact':
-          return '互动'
-        case 'personalCenter':
-          return '我的资料'
-        }
+        config:config,
+        Mobile:'',
+        Password:''
       }
     },
     mounted:function(){
-        var self = this;
-        this.$nextTick(function(){         
-         self.f7 = self.$f7Router.framework7;
-         // self.f7.mainView.loadPage({url:'/home'});
-          self.companylist = self.f7.swiper('.swiper-3', {
-            pagination:'.swiper-3 .swiper-pagination',
-            spaceBetween: 10,
-            slidesPerView: 2.4
-          });
-        })
+      this.$nextTick(function(){
+        // this.Login();
+      })
     },
     methods:{
-        tabActived(tab) {
-          this.activedTab = tab
+       Login(){
+        var data = {
+          "mobile":this.Mobile,
+          "password":this.Password
         }
+        if(this.Mobile === '' || this.Mobile === null){
+          self.f7.alert('','请输入手机号');
+        }else if(this.Password === '' || this.Password === null){
+          self.f7.alert('','请输入密码');
+        }else{
+          self.f7.showPreloader(' ');
+          this.$http.post(this.config.domin + 'nengtou/app/login?mobile='+data.mobile+'&password='+data.password).then(response => {
+              if (response.body.code === 0 && response.body.succeed) {
+                this.$store.commit('saveUser',response.body)
+                self.f7.hidePreloader()
+                self.f7.mainView.loadPage({url:'/index'})
+              } else {
+                  self.f7.hidePreloader()
+                  self.f7.alert('',response.body.msg);
+              }
+            },
+          (response) => {
+              // self.$message.error(response.body.msg);
+          })
+        }
+      },
     }
   }
 </script>
 <style>
-  .banner{
-    height: 9rem;
-    background:#fff;
-  }
-  /*.noNavbar{
-    display: none;
-  }
-  .noNavbar.toolbar-fixed .page-content{
-    padding-top:0;
-  }*/
-  .banner .swiper-container{
-    height: 9rem;
-  }
-  .banner .swiper-container .swiper-slide img{
-    width: 100%;
-    height: 100%
-  }
-   .banner .swiper-container-horizontal>.swiper-pagination-bullets{
-    bottom:0px;
-  }
-   .banner .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{
-    margin:0 3px;
-  }
-  .banner .swiper-pagination-bullet{
-    width:7px;
-    height: 7px;
-  }
-  .swiper-pagination-bullet-active{
-    background:none;
-    border:2px solid #fff;
-  }
-  .nav{
-    padding:1rem .5rem;
-    background:#fff;
-  }
-  .nav .row .col-auto{
-    text-align: center;
-  }
-  .nav .row .col-auto a{
-    display: block;
-    color:#000;
-  }
-  .nav .row .col-auto i{
-    width:40%;
-    display: inline-block;
-  }
-  .nav .row .col-auto i img{
-    width: 100%
-  }
-  .nav .row .col-auto p{
-    font-size:.8rem;
-  }
-  .enterCompany{
-    margin-top:15px;
-    background:#fff;
-  }
-  .head.title{
-    padding:15px 0 10px 0;
-    margin:0 15px;
-    border-bottom: 1px solid #e4e4e4
-  }
-  .head.title span{
-    font-size: .9rem;
-    float: left;
-  }
-  .head.title span i{
-    width:1rem;
-    height: 1rem;
-    display: inline-block;
-    margin-right: 5px;
-  }
-  .notice .head.title{
-    margin: 0
-  }
-  .head.title span i img{
-    width: 100%;
-    vertical-align: -4px;
-  }
-  .head.title a.more{
-    font-size: .8rem;
-    float: right;
-    color:#999;
-    margin-top:2px;
-  }
-  .head.title a.more span{
-    font-size: .8rem;
-    margin-right: 5px;
-  }
-  .companyList{
-    padding: 15px 15px 25px;
-  }
-  .companyList .swiper-slide{
-
-  }
-  .companyList .swiper-slide .img{
+  .login{
+    width:100%;
+    height: 100vh;
+    background:url(../static/imgs/login.png);
+    background-position: 100%;
+    background-size: cover;
     position: relative;
-    height: 5rem;
   }
-  .companyList .swiper-slide .img img{
-    width: 100%;
-    height: 100%;
-    border-radius: 3px;
-  }
-  .companyList .swiper-slide .img .cover{
+  .login .loginBox{
     position: absolute;
-    width: 100%;
-    top:0;
-    left: 0;
-    background:rgba(0,0,0,.3);
+    top:13rem;
+    width:70%;
+    left: 15%
+  }
+  .login .loginBox .list-block ul{
+    background:none;
+  }
+  .login .loginBox .list-block ul:before{
+    height: 0px;
+  }
+  .login .loginBox .list-block .item-inner:after{
+    height: 0px;
+  }
+  .login .loginBox .list-block ul:after{
+    height: 0px;
+  }
+  .login .loginBox .list-block input[type=text]{
+    background:#fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+  .login .loginBox .list-block input[type=password]{
+    background:#fff;
+    border-radius: 5px;
+    padding-left: 10px;
+  }
+  .login .loginBox .list-block .item-content{
+    padding-left: 0px;
+  }
+  .login .loginBox .list-block .item-inner{
+    padding-right: 0px;
+  }
+  .login .loginBox .forgetWord{
+    color:#fff;
+    margin-top: 10px;
+    display: block;
+  }
+  .login .loginBox a.loginBtn{
+      height: 44px;
+      line-height: 44px;
+      margin-top: 15px;
+  }
+  .login .loginBox .line{
+    height: 1px;
+    background:rgba(255,255,255,.3);
+    margin:20px 0;
+    position: relative;
+  }
+  .login .loginBox .line span{
+    display: inline-block;
+    width:4rem;
+    height: 1rem;
+    position: absolute;
+    top:-.5rem;
+    background:#49b3f8;
+    left: 5rem;
     text-align: center;
     color:#fff;
-    height:5rem;
-    line-height: 5rem;
-    font-weight: 600;
-    border-radius: 3px;
-    font-size: 1rem;
-  }
-  .notice{
-    background:#fff;
-    margin-top:15px;
-    padding: 0 15px;
-  }
-  .notice .nt-box {
-    padding:0 0 10px;
-    border-bottom: 1px solid #e4e4e4
-  }
-  .notice .nt-box a p{
-    color:#282828;
-  }
-  .notice .nt-box:last-child{
-    border:none;
-    padding-bottom: 15px;
-  }
-  .notice .nt-box p.title{
-    font-size: .9rem;
-    margin: 10px 0
-  }
-  .notice .nt-box .img{
-    width:100%;
-  }
-  .notice .nt-box1 .img img{
-    width: 100%;
-    border-radius: 3px;
-  }
-  .notice .nt-box2 .img img{
-    width:32.2%;
-    height: 4.5rem;
-  }
-  .notice .nt-box p.time{
-    margin-top:3px;
-  }
-  .notice .nt-box p.time span{
     font-size: .8rem;
-    color:#999;
   }
-  .notice .nt-box p.time span:first-child{
-    float: left
-  }
-  .notice .nt-box p.time span:last-child{
-    float: right;
-  }
-  .navbar .right a i{
-    width:24px;
-    height: 24px;
-  }
-  .navbar .right a img{
-    width: 100%;
-    vertical-align: 3px;
+  .login .loginBox a.onlyLook{
+    height: 44px;
+    line-height: 44px;
+    background:rgba(0,136,225,.6);
   }
 </style>

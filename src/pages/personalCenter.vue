@@ -21,7 +21,7 @@
                 <a href="#" class="item-link item-content">
                   <div class="item-inner noIcon">
                     <div class="item-title">名字</div>
-                    <div class="item-after">周先生</div>
+                    <div class="item-after">{{userInfo.name}}</div>
                   </div>
                 </a>
               </li>
@@ -29,7 +29,7 @@
                 <a href="#" class="item-link item-content">
                   <div class="item-inner noIcon">
                     <div class="item-title">联系电话</div>
-                    <div class="item-after">13888888888</div>
+                    <div class="item-after">{{userInfo.mobile}}</div>
                   </div>
                 </a>
               </li>
@@ -79,21 +79,48 @@
             </ul>
           </div>
         </div>
-        <div class="btn">
-          <a href="#" class="button active">退出登录</a>
+        <div class="btn saveBtn">
+          <a href="#" class="button active" @click="loginOut">退出登录</a>
         </div>
       </f7-block>
     </div>
 </template>
 
 <script>
-// import Bottom from '../pages/bottom.vue'
+import { config } from '../assets/config.js'
 export default {
-  name:'personalCenter'
-  // components:{
-  //   Bottom
-  // },
-}
+  name:'personalCenter',
+  data:function(){
+    return{
+      config:config,
+      userInfo:{},
+    }
+  },
+  mounted:function(){
+      this.$nextTick(function(){
+        this.userInfo = this.$store.state.user
+      })
+    },
+  methods:{
+    loginOut:function(){
+      self.f7.showPreloader(' ');
+      this.$http.post(this.config.domin + 'nengtou/app/loginout').then(response => {
+              if (response.body.code === 0 && response.body.succeed) {
+                self.f7.hidePreloader()
+                sessionStorage.removeItem('user');
+                sessionStorage.removeItem('userToken');
+                self.f7.mainView.loadPage({url:'/'})
+              } else {
+                  // self.f7.hidePreloader()
+                  self.f7.alert('',response.body.msg);
+              }
+            },
+          (response) => {
+              // self.$message.error(response.body.msg);
+          })
+        },
+    },
+  }
 </script>
 <style>
 .personalCenter .list-block{
@@ -132,15 +159,5 @@ export default {
 .personalCenter .list-block .item-after.phone{
   color:#2198f2;
 }
-.personalCenter .btn{
-  padding:0 15px;
-  margin:50px 0;
-}
-.personalCenter .btn .button.active{
-  height: 2.8rem;
-  line-height: 2.8rem;
-  font-size: 1rem;
-  background:#2198f2;
-  border:none;
-}
+
 </style>

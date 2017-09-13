@@ -1,8 +1,8 @@
 export default [
-  // {
-  //     path: '/home/',
-  //     component: require('./pages/home.vue')
-  // },
+  {
+      path: '/index/',
+      component: require('./pages/index.vue')
+  },
   {
       path: '/teamManage/',
       component: require('./pages/teamManage.vue')
@@ -46,6 +46,30 @@ export default [
   {
       path: '/myTeam/',
       component: require('./pages/teamManage/myTeam.vue')
+  },
+  {
+      path: '/honor/',
+      component: require('./pages/teamManage/honor.vue')
+  },
+  {
+      path: '/addHonor/',
+      component: require('./pages/teamManage/addHonor.vue')
+  },
+  {
+      path: '/allMember/',
+      component: require('./pages/teamManage/allMember.vue')
+  },
+  {
+      path: '/addMember/',
+      component: require('./pages/teamManage/addMember.vue')
+  },
+  {
+      path: '/myService/',
+      component: require('./pages/service/myService.vue')//我的服务
+  },
+  {
+      path: '/addService/',
+      component: require('./pages/service/addService.vue')//添加服务
   },
   // {
   //     path: '/personalCenter/',

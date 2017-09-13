@@ -71,3 +71,45 @@ html.ios-gt-8 .navbar .center{
 i img{
   width:100%;
 }
+.save.btn .button.active {
+  height: 2.8rem;
+  line-height: 2.8rem;
+  font-size: 1rem;
+  background: #2198f2;
+  border: none;
+  margin-top:30px;
+}
+.fixedBottom.btn{
+  width:100%;
+  position: fixed;
+  height: 3rem;
+  bottom: 0;
+  left: 0;
+  padding:0 15px;
+  z-index: 100
+  }
+  .fixedBottom.btn a{
+  height: 2.6rem;
+  line-height: 2.6rem;
+  font-size: 1rem;
+  background: #0098f9;
+  border:none;
+  }
+  ul{
+    padding-left: 0
+  }
+  .btn.saveBtn{
+  padding:0 15px;
+  margin:50px 0;
+  }
+  .btn.saveBtn .button.active{
+    height: 2.8rem;
+    line-height: 2.8rem;
+    font-size: 1rem;
+    background:#2198f2;
+    border:none;
+  }
+  .modal-preloader{
+    width:70px;
+    margin-left: -35px;
+  }

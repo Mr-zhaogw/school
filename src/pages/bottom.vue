@@ -1,4 +1,4 @@
-<template id="bottom">
+<!-- <template id="bottom">
   <div class="toolbar tabbar tabbar-labels">
       <div class="toolbar-inner">
           <a :href="active == 'home'?'#':'/home/'" class="tab-link active">
@@ -61,4 +61,4 @@
     display: block;
     line-height: 3px;
   }
-</style>
+</style> -->

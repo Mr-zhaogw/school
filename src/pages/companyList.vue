@@ -1,84 +1,22 @@
 <template>
-  <f7-page class="allCompany">
+  <f7-page class="allCompany" navbar-fixed>
     <f7-navbar title=" " back-link="入驻企业" sliding></f7-navbar>
     <f7-block>
       <div class="blank"></div>
       <div class="allCompanyBox">
-        <div class="companyBox fn-clear">
-          <f7-link href="/companyDetail">
+        <div class="companyBox fn-clear" v-for="(item,index) in companyList">
+          <f7-link :href="'/companyDetail?id='+item.id">
             <div class="left">
-              <img src="../../static/imgs/banner.png">
+              <img :src="item.imgUrl">
             </div>
             <div class="right">
-              <h2>佳琪共享篮球</h2>
-              <span>负责人：张毅</span>
+              <h2>{{item.name}}</h2>
+              <span>负责人：{{item.userName}}</span>
               <ul class="fn-clear label">
-                <li>共享经济</li>
-                <li>智能硬件</li>
-                <li>算法工程</li>
+                <li v-for="tag in (item.tag.split(','))">{{tag}}</li>
               </ul>
               <p class="fn-clear">
-                <span><i><img src="../../static/imgs/icon/time.png"></i>2017-8-10</span>
-                <span><i><img src="../../static/imgs/icon/team.png"></i>16</span>
-              </p>
-            </div>
-          </f7-link>
-        </div>
-        <div class="companyBox fn-clear">
-          <f7-link href="/companyDetail">
-            <div class="left">
-              <img src="../../static/imgs/banner.png">
-            </div>
-            <div class="right">
-              <h2>佳琪共享篮球</h2>
-              <span>负责人：张毅</span>
-              <ul class="fn-clear label">
-                <li>共享经济</li>
-                <li>智能硬件</li>
-                <li>算法工程</li>
-              </ul>
-              <p class="fn-clear">
-                <span><i><img src="../../static/imgs/icon/time.png"></i>2017-8-10</span>
-                <span><i><img src="../../static/imgs/icon/team.png"></i>16</span>
-              </p>
-            </div>
-          </f7-link>
-        </div>
-        <div class="companyBox fn-clear">
-          <f7-link href="/companyDetail">
-            <div class="left">
-              <img src="../../static/imgs/banner.png">
-            </div>
-            <div class="right">
-              <h2>佳琪共享篮球</h2>
-              <span>负责人：张毅</span>
-              <ul class="fn-clear label">
-                <li>共享经济</li>
-                <li>智能硬件</li>
-                <li>算法工程</li>
-              </ul>
-              <p class="fn-clear">
-                <span><i><img src="../../static/imgs/icon/time.png"></i>2017-8-10</span>
-                <span><i><img src="../../static/imgs/icon/team.png"></i>16</span>
-              </p>
-            </div>
-          </f7-link>
-        </div>
-        <div class="companyBox fn-clear">
-          <f7-link href="/companyDetail">
-            <div class="left">
-              <img src="../../static/imgs/banner.png">
-            </div>
-            <div class="right">
-              <h2>佳琪共享篮球</h2>
-              <span>负责人：张毅</span>
-              <ul class="fn-clear label">
-                <li>共享经济</li>
-                <li>智能硬件</li>
-                <li>算法工程</li>
-              </ul>
-              <p class="fn-clear">
-                <span><i><img src="../../static/imgs/icon/time.png"></i>2017-8-10</span>
+                <span><i><img src="../../static/imgs/icon/time.png"></i>{{item.createtime | changeDate}}</span>
                 <span><i><img src="../../static/imgs/icon/team.png"></i>16</span>
               </p>
             </div>
@@ -90,8 +28,47 @@
 </template>
 
 <script>
+import { config } from '../assets/config.js'
+import utils from '../assets/utils.js'
 export default {
   name:'companyList',
+  data(){
+    return{
+      config:config,
+      companyList:[],
+      tags:[],
+    }
+  },
+
+  filters:{
+      changeDate(time){
+          var time = utils.fomatDate(time);
+          return time ;
+      }
+  },
+
+  mounted(){
+    this.$nextTick(function(){
+      this.getCompanyList();
+    })
+  },
+  methods:{
+    getCompanyList(){
+       self.f7.showPreloader(' ');
+       this.$http.post(this.config.domin + 'nengtou/app/project/list?page=0&pagesize=5').then(response => {
+
+              if (response.status === 200 && response.ok) {
+                console.log(response);
+                self.f7.hidePreloader()
+                this.companyList = response.body.rows;
+                console.log(this.tags);
+              }
+            },
+          (response) => {
+              // self.$message.error(response.body.msg);
+          })
+    }
+  }
 }
 </script>
 <style>

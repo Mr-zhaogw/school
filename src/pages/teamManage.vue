@@ -1,8 +1,8 @@
 <template>
-  <f7-page class="teamManage">
+  <f7-page class="teamManage" navbar-fixed>
     <f7-navbar title=" " back-link="主要成员" sliding>
     	<f7-nav-right>
-	        <f7-link>添加</f7-link>
+	        <f7-link href="/addMember">添加</f7-link>
 	    </f7-nav-right>
     </f7-navbar>
     <f7-block>

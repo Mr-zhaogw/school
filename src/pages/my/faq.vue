@@ -1,32 +1,59 @@
 <template>
-  <f7-page class="FAQ">
+  <f7-page class="FAQ" navbar-fixed>
     <f7-navbar title=" " back-link="常见问题" sliding></f7-navbar>
     <f7-block>
       <div class="blank"></div>
-      <div class="faqBox padding-l-r">
-        <h2>Q.关于园区上班时间</h2>
-        <p>园区上午8:30开门，晚上21:00关门，如需在此时间外加班，需要提前向园区办公室主任进行申请。</p>
+      <div class="faqBox" v-for="item in faqList">
+          <div class="content">
+            <h2>Q.{{item.title}}</h2>
+            <p v-html="item.content"></p>
+          </div>
+          <div class="blank"></div>
       </div>
-      <div class="blank"></div>
-      <div class="faqBox padding-l-r">
-        <h2>Q.关于园区上班时间</h2>
-        <p>园区上午8:30开门，晚上21:00关门，如需在此时间外加班，需要提前向园区办公室主任进行申请。</p>
-      </div>
+
       
     </f7-block>
   </f7-page>
 </template>
 
 <script>
+import { config } from '../../assets/config.js'
 export default {
   name:'safety',
+  data(){
+    return{
+      config:config,
+      faqList:[]
+    }
+  },
+  mounted(){
+    this.$nextTick(function(){      
+        this.getFaqList();
+    })
+  },
+  methods:{
+    getFaqList(){
+      self.f7.showPreloader(' ');
+      this.$http.post(this.config.domin + 'nengtou/app/question/list?page=0&pagesize=10').then(response => {
+            if (response.status === 200 && response.ok) {
+                self.f7.hidePreloader();
+                this.faqList = response.body.rows;
+            } else {
+                self.f7.alert('',response.body.msg);
+            }
+          },
+        (response) => {
+            // self.$message.error(response.body.msg);
+        })
+    }
+  }
 }
 </script>
 <style>
   .FAQ{
     background:#f2f2f2;
   }
-  .FAQ .faqBox{
+  .FAQ .faqBox .content{
     padding:15px;
     background:#fff;
   }
@@ -40,30 +67,5 @@ export default {
     font-size: .9rem;
     line-height: 25px;
   }
-  /*.safety .list-block .item-content{
-    padding-left: 0
-  }
-  .safety .list-block{
-    margin: 0
-  }
-  .safety .list-block ul:before{
-    height: 0px;
-  }
-  input::-webkit-input-placeholder {
-     color: #adadad;
- }
- .safety .list-block input[type=password]{
-  height: 50px;
- }
- .safety .list-block .item-content{
-  min-height: 50px;
- }
- .safety .btn .button.active {
-    height: 2.8rem;
-    line-height: 2.8rem;
-    font-size: 1rem;
-    background: #2198f2;
-    border: none;
-    margin-top:30px;
-}*/
+
 </style>

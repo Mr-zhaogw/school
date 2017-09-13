@@ -1,5 +1,5 @@
 <template>
-  <f7-page class="safety">
+  <f7-page class="safety" navbar-fixed>
     <f7-navbar title=" " back-link="账号安全" sliding></f7-navbar>
     <f7-block>
       <div class="blank"></div>
@@ -27,7 +27,7 @@
             </li>
           </ul>
         </div>
-        <div class="btn">
+        <div class="btn save">
           <a href="#" class="button active">保存</a>
         </div>
       </div>
@@ -62,12 +62,4 @@ export default {
  .safety .list-block .item-content{
   min-height: 50px;
  }
- .safety .btn .button.active {
-    height: 2.8rem;
-    line-height: 2.8rem;
-    font-size: 1rem;
-    background: #2198f2;
-    border: none;
-    margin-top:30px;
-}
 </style>

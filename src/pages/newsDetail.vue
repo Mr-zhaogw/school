@@ -1,5 +1,5 @@
 <template>
-  <f7-page class="newsDetail">
+  <f7-page class="newsDetail" navbar-fixed>
     <f7-navbar title=" " back-link="园区最新通告在这里查看" sliding></f7-navbar>
     <f7-block>
       <div class="blank"></div>
@@ -18,8 +18,27 @@
 </template>
 
 <script>
+import { config } from '../assets/config.js'
+import utils from '../assets/utils.js'
 export default {
   name:'newsDetail',
+  data(){
+    return{
+      config:config,
+      newsId:0,
+    }
+  },
+  mounted(){
+    this.$nextTick(function(){
+      this.newsId = this.$route.query.id
+      this.getNewsDetail();
+    })
+  },
+  methods:{
+    getNewsDetail(){
+      this.$http.post(this.config.domin + 'nengtou/app/news/detail?id='+)
+    },
+  }
 }
 </script>
 <style>

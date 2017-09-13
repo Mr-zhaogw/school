@@ -22,21 +22,37 @@ import Routes from './routes.js'
 // Import App Component
 import App from './app'
 
-// Init F7 Vue Plugin
+import store from './assets/store.js'
+
+
 Vue.use(Framework7Vue);
 Vue.use(VueResource);
-// Init App
+
+Vue.config.productionTip = false
+
+Vue.http.interceptors.push(function(request, next) {
+  request.method = 'POST';
+  if((request.url).match('\\?')){
+      request.url = request.url +  ((sessionStorage.getItem('userToken'))?('&token='+sessionStorage.getItem('userToken')):'');
+  }else{
+    request.url = request.url +  ((sessionStorage.getItem('userToken'))?('?token='+sessionStorage.getItem('userToken')):'');
+  }
+  next(function(response){
+    
+  });
+});
+
+
 new Vue({
   el: '#app',
+  store,
   template: '<app/>',
-  // Init Framework7 by passing parameters here
   framework7: {
     root: '#app',
     /* Uncomment to enable Material theme: */
     // material: true,
     routes: Routes,
   },
-  // Register App Component
   components: {
     app: App
   }

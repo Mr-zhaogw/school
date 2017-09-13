@@ -1,6 +1,6 @@
 <!-- 立即预约 -->
 <template>
-  <f7-page class="atOnceorder">
+  <f7-page class="atOnceorder" navbar-fixed>
     <f7-navbar title=" " back-link="1号会议室" sliding>
       <f7-nav-right>
           <f7-link>开锁</f7-link>
@@ -84,7 +84,7 @@
           </ul>
         </div>            
       </div>
-      <div class="btn">
+      <div class="fixedBottom btn">
         <a href="#" class="button active">保存</a>
       </div>
     </f7-block>
@@ -152,22 +152,7 @@
     .disabled{
       opacity: 1
     }
-    .atOnceorder .btn{
-      width:100%;
-      position: fixed;
-      height: 3rem;
-      bottom: 0;
-      left: 0;
-      padding:0 15px;
-      z-index: 100
-    }
-    .atOnceorder .btn a{
-      height: 2.6rem;
-      line-height: 2.6rem;
-      font-size: 1rem;
-      background: #0098f9;
-      border:none;
-    }
+    
     .page.atOnceorder{
       transform:none !important;
     }

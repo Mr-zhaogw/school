@@ -1,8 +1,8 @@
 <template>
-  <f7-page class="businessServices">
+  <f7-page class="businessServices" navbar-fixed>
     <f7-navbar title=" " back-link="工商服务" sliding>
       <f7-nav-right>
-          <f7-link>我的服务</f7-link>
+          <f7-link href="/myService">我的服务</f7-link>
       </f7-nav-right>
     </f7-navbar>
     <f7-block>
@@ -10,51 +10,11 @@
       <div class="servicesBox">
         <div class="list-block">
           <ul>
-            <li>
+            <li v-for="item in servicesList">
               <a href="#" class="item-link item-content">
                 <div class="item-inner">
-                  <div class="item-title">工商资料办理规则</div>
-                  <div class="item-after">2017-8-10</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">工商资料办理规则</div>
-                  <div class="item-after">2017-8-10</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">工商资料办理规则</div>
-                  <div class="item-after">2017-8-10</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">工商资料办理规则</div>
-                  <div class="item-after">2017-8-10</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">工商资料办理规则</div>
-                  <div class="item-after">2017-8-10</div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">工商资料办理规则</div>
-                  <div class="item-after">2017-8-10</div>
+                  <div class="item-title">{{item.title}}</div>
+                  <div class="item-after">{{item.createtime | changeDate}}</div>
                 </div>
               </a>
             </li>
@@ -66,8 +26,45 @@
 </template>
 
 <script>
+import { config } from '../assets/config.js'
+import utils from '../assets/utils.js'
 export default {
   name:'businessServices',
+  data(){
+    return{
+      config:config,
+      servicesList:[]
+    }
+  },
+
+  filters:{
+      changeDate(time){
+          var time = utils.fomatDate(time);
+          return time ;
+      }
+  },
+
+  mounted(){
+    this.$nextTick(function(){
+      this.getServicesList();
+    })
+  },
+  methods:{
+      getServicesList(){
+        self.f7.showPreloader(' ');
+        this.$http.post(this.config.domin + 'nengtou/app/busservicenews/list?page=0&pagesize=5').then(response => {
+              if (response.status === 200 && response.ok) {
+                  self.f7.hidePreloader();
+                  this.servicesList = response.body.rows;
+              } else {
+                  self.f7.alert('',response.body.msg);
+              }
+            },
+          (response) => {
+              // self.$message.error(response.body.msg);
+          })
+     }
+  }
 }
 </script>
 <style>

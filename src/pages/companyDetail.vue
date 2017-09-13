@@ -1,55 +1,99 @@
 <template>
-  <f7-page class="companyDetail">
+  <f7-page class="companyDetail" navbar-fixed>
     <f7-navbar title=" " back-link="企业介绍" sliding></f7-navbar>
     <f7-block>
-      <div class="banner">
-        <f7-swiper pagination :params="{speed:500}">
-            <f7-swiper-slide><img src="../../static/imgs/banner.png"></f7-swiper-slide>
-            <f7-swiper-slide><img src="../../static/imgs/banner.png"></f7-swiper-slide>
-            <f7-swiper-slide><img src="../../static/imgs/banner.png"></f7-swiper-slide>
-        </f7-swiper>
-      </div>
-      <div class="companyInf">
+      <div class="companyInf fn-clear">
+        <div class="conpanyLogon">
+          <img :src="companyInfo.imgUrl">
+        </div>
         <div class="text">
-          <p>佳琪共享篮球</p>
+          <p>{{companyInfo.name}}</p>
           <ul class="fn-clear label">
-            <li>共享经济</li>
-            <li>智能硬件</li>
-            <li>算法工程</li>
+            <li v-for="tag in tags">{{tag}}</li>
             <div class="clear"></div>
           </ul>
-          <span>团队：69人</span>
+          <!-- <span>团队：69人</span> -->
+        </div>
+      </div>
+      <div class="blank"></div>
+      <div class="totlaPeople"> 
+        <div class="list-block">
+          <ul>
+            <li>
+              <a href="#" class="item-link item-content">
+                <div class="item-inner">
+                  <div class="item-title">团队：{{totalPeople}} 人</div>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="blank"></div>
       <div class="Honor">
         <div class="intro box">
           <span>项目简介</span>
-          <p>言归正传，最近有人在群里问怎么将新创建的本地代码上传到github上，这里简单的记录一下，我喜欢使用命令行，这里全用命令行来实现，不了解Git命令的可以去了解下</p>
+          <p v-html="companyInfo.introduce"></p>
         </div>
-        <div class="brand box">
+        <div class="brand box" v-for="awards in companyInfo.dataList">
+          <span>{{awards.dataName}}</span>
+          <div class="img fn-clear">
+            <img :src="awards.imgUrls">
+          </div>
+          <p v-html="awards.dataExplain"></p>
+        </div>
+        <!-- <div class="brand box">
           <span>商标资质</span>
           <div class="img fn-clear">
             <img src="../../static/imgs/banner.png">
-          </div>
-          <p>说明：言归正传，最近有人在群里问怎么将新创建的本地代码上传到github上</p>
-        </div>
-        <div class="brand box">
-          <span>商标资质</span>
-          <div class="img fn-clear">
-            <img src="../../static/imgs/banner.png">
             <img src="../../static/imgs/banner.png">
           </div>
           <p>说明：言归正传，最近有人在群里问怎么将新创建的本地代码上传到github上</p>
-        </div>
+        </div> -->
       </div>
     </f7-block>
   </f7-page>
 </template>
 
 <script>
+import { config } from '../assets/config.js'
 export default {
   name:'companyDetail',
+  data(){
+    return{
+        config:config,
+        companyId:'',
+        companyInfo:'',
+        tags:[],
+        totalPeople:0
+    }
+  },
+  mounted(){
+    this.$nextTick(function(){
+      this.companyId = this.$route.query.id
+      this.getCompanyDetail();
+    })
+  },
+  methods:{
+    getCompanyDetail(){
+        self.f7.showPreloader(' ');
+        this.$http.post(this.config.domin + 'nengtou/app/project/detail?id='+this.companyId).then(response => {
+              if (response.status === 200 && response.ok) {
+                console.log(response);
+                self.f7.hidePreloader()
+                    this.companyInfo = response.body;
+                    this.tags = ((response.body.tag).split(','))
+                    this.totalPeople = response.body.userList.length
+              } else {
+                  self.f7.hidePreloader()
+                  self.f7.alert('',response.body.msg);
+              }
+            },
+          (response) => {
+              // self.$message.error(response.body.msg);
+          })
+    } 
+  }
 }
 </script>
 <style>
@@ -126,5 +170,26 @@ export default {
   font-size: .8rem;
   line-height: 25px;
   color:#a7a7a7;
+}
+.companyDetail .companyInf .conpanyLogon{
+  float: left;
+  width:4rem;
+  margin-right: 15px;
+  height: 4rem;
+}
+.companyDetail .companyInf .conpanyLogon img{
+  width:100%;
+}
+.companyDetail .companyInf .text{
+  float: left;
+}
+.companyDetail .list-block ul:before{
+ height: 0
+}
+.companyDetail .list-block ul:after{
+    height: 0
+}
+.companyDetail .list-block .item-inner{
+  min-height: 50px;
 }
 </style>

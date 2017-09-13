@@ -1,5 +1,5 @@
 <template>
-  <f7-page class="meetingRoom">
+  <f7-page class="meetingRoom" navbar-fixed>
     <f7-navbar title=" " back-link="预约会议室" sliding></f7-navbar>
     <f7-block>
       <div class="timeTab">

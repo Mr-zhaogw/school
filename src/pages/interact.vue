@@ -120,11 +120,11 @@
         },
         {
          text:'删除',
-        color:'red' 
+         color:'red' 
         },
         {
          text:'取消',
-        color:'black' 
+         color:'black' 
         }
         ];
         self.f7.actions(buttons)
@@ -304,14 +304,14 @@
   }
   .actions-modal-button:first-child{
     border-radius: 0;
-    line-height: 70px;
+    /*line-height: 70px;*/
   }
   .actions-modal-button:last-child{
     border-top:1px solid #d1d1d1;
     border-radius: 0
   }
   .actions-modal-button:nth-of-type(2){
-     line-height: 50px;
+     /*line-height: 50px;*/
   }
   .actions-modal-button:after{
     height: 0
