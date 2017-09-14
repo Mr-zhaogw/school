@@ -4,7 +4,7 @@
       <f7-nav-left></f7-nav-left>
       <f7-nav-center sliding>{{navbarTitle}}</f7-nav-center>
       <f7-nav-right>
-        <f7-link v-show="activedTab === 'interact'"><i><img src="../../static/imgs/icon/add.png"></i></f7-link>
+        <f7-link v-show="activedTab === 'interact'" href="/addInteract"><i><img src="../../static/imgs/icon/add.png"></i></f7-link>
       </f7-nav-right>
     </f7-navbar>
     <div class="toolbar tabbar tabbar-labels">

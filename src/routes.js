@@ -71,6 +71,10 @@ export default [
       path: '/addService/',
       component: require('./pages/service/addService.vue')//添加服务
   },
+  {
+      path: '/addInteract/',
+      component: require('./pages/interact/addInteract.vue')//添加服务
+  },
   // {
   //     path: '/personalCenter/',
   //     component: require('./pages/personalCenter.vue')

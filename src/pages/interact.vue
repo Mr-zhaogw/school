@@ -12,69 +12,39 @@
           <span>查看我的评论</span>
         </div>
       </div>
-      <div class="myspeak padding-l-r">
-        <div class="speakList fn-clear" v-for="item in interactList">
-          <div class="left">
-            <div class="head">
-              <img src="../../static/imgs/timg.jpg">
-            </div>
-          </div>
-          <div class="right">
-            <div class="title">
-              <span>{{item.userName}}</span>
-              <span>富士康供应链管理</span>
-            </div>
-            <div class="text">
-              <p>出售二手电动车一台，各团队如有需要联系我，八成新，内部出售，童叟无欺。出售二手电动车一台，各团队如有需要联系我，八成新，内部出售，童叟无欺。</p>
-              <div class="img">
-                <img src="../../static/imgs/timg.jpg">
-                <img src="../../static/imgs/timg.jpg">
+      <div class="myspeak">
+          <div class="speakList fn-clear" v-for="item in interactList">
+            <div class="padding-l-r">
+              <div class="left">
+                <div class="head">
+                  <img src="../../static/imgs/timg.jpg">
+                </div>
+              </div>
+              <div class="right">
+                <div class="title">
+                  <span>{{item.userName}}</span>
+                  <span>{{item.projcetName}}</span>
+                </div>
+                <div class="text">
+                  <p>{{item.content}}</p>
+                  <div class="img" v-if="item.files !== undefined">
+                    <img :src="img" v-for="img in (item.files.split(','))">
+                  </div>
+                </div>
+                <div class="time-F fn-clear">
+                  <span>{{item.createtime | JLDate}}</span>
+                  <i @click="handle"><img src="../../static/imgs/icon/hf.png"></i>
+                </div>
+                <div class="reply" v-if="item.childList !== undefined">
+                  <div class="box">
+                    <p v-for="reply in item.childList"><span>{{reply.userName}}</span>：{{item.content}}</p>
+                    <!-- <p><span>周云</span>：我想要啊，说话算数的我想要啊，说话算数的。我想要啊，说话算数的。我想要啊，说话算数的</p> -->
+                  </div>
+                  <i></i>
+                </div>
               </div>
             </div>
-            <div class="time-F fn-clear">
-              <span>17分钟前</span>
-              <i @click="handle"><img src="../../static/imgs/icon/hf.png"></i>
-            </div>
-            <div class="reply">
-              <div class="box">
-                <p><span>周云</span>：我想要啊，说话算数的</p>
-                <p><span>周云</span>：我想要啊，说话算数的我想要啊，说话算数的。我想要啊，说话算数的。我想要啊，说话算数的</p>
-              </div>
-              <i></i>
-            </div>
-          </div>
         </div>
-        <!-- <div class="speakList fn-clear">
-          <div class="left">
-            <div class="head">
-              <img src="../../static/imgs/timg.jpg">
-            </div>
-          </div>
-          <div class="right">
-            <div class="title">
-              <span>张磊</span>
-              <span>富士康供应链管理</span>
-            </div>
-            <div class="text">
-              <p>出售二手电动车一台，各团队如有需要联系我，八成新，内部出售，童叟无欺。出售二手电动车一台，各团队如有需要联系我，八成新，内部出售，童叟无欺。</p>
-              <div class="img">
-                <img src="../../static/imgs/timg.jpg">
-                <img src="../../static/imgs/timg.jpg">
-              </div>
-            </div>
-            <div class="time-F fn-clear">
-              <span>17分钟前</span>
-              <i><img src="../../static/imgs/icon/hf.png"></i>
-            </div>
-            <div class="reply">
-              <div class="box">
-                <p><span>周云</span>：我想要啊，说话算数的</p>
-                <p><span>周云</span>：我想要啊，说话算数的我想要啊，说话算数的。我想要啊，说话算数的。我想要啊，说话算数的</p>
-              </div>
-              <i></i>
-            </div>
-          </div>
-        </div> -->
         <div class="replyBox">
            <f7-messagebar placeholder="" send-link="发送" @submit="onSubmit" v-model="message" :class="message.length > 0 ?'btnStyle':''"></f7-messagebar>
         </div>
@@ -84,6 +54,7 @@
 </template>
 <script>
 import { config } from '../assets/config.js'
+import utils from '../assets/utils.js'
   export default{
     name:'interact',
     data(){
@@ -93,6 +64,14 @@ import { config } from '../assets/config.js'
         interactList:[],
       }
     },
+
+    filters:{
+      JLDate(time){
+          var time = utils.distanceDate(time);
+          return time ;
+      }
+    },
+
     mounted(){
      var self = this;
      var DomT = document.querySelector('.replyBox');
@@ -194,7 +173,9 @@ import { config } from '../assets/config.js'
     padding-bottom: 1rem;
   }
   .interact .myspeak .speakList{
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f2f2f2
   }
   .interact .myspeak .speakList .left{
     width:13%;
