@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 
   state:{
-    user:{}
+    user:{},
+    parentId:0
   },
 
   mutations:{
@@ -23,6 +24,9 @@ export default new Vuex.Store({
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('userToken');
       }
-    }
+    },
+    parentId(state,data){
+      state.parentId = data;
+    },
   }
 })

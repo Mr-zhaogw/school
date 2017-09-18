@@ -39,7 +39,8 @@ const distanceDate = ( time ) =>{
     }
 }
 
+
 module.exports = {
     fomatDate,
-    distanceDate
+    distanceDate,
 }

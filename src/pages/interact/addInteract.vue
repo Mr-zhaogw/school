@@ -26,11 +26,11 @@
                 <img src="../../../static/imgs/timg.jpg">
               </li> -->
             </ul>
-            <i><img src="../../../static/imgs/icon/addImg.png"></i>
+            <i @click="addPicture"><img src="../../../static/imgs/icon/addImg.png"></i>
           </div>
         </div>
         <div class="fixedBottom btn">
-          <a href="#" class="button active">发送</a>
+          <a href="#" class="button active">发布</a>
         </div>
       </div>
     </f7-block>
@@ -43,15 +43,16 @@ import { config } from '../../assets/config.js'
     data(){
       return{
         config:config,
-      }
-    },
-    mounted(){
-      this.$nextTick(function(){
-
-      })
-    },
+    }
+  },
+    // mounted(){
+    //   this.$nextTick(function(){
+    //   })
+    // },
     methods:{
-
+      addPicture(){
+       
+      },
     }
   }
 </script>

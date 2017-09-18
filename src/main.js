@@ -23,12 +23,22 @@ import Routes from './routes.js'
 import App from './app'
 
 import store from './assets/store.js'
-
+import VueCordova from 'vue-cordova'
 
 Vue.use(Framework7Vue);
 Vue.use(VueResource);
-
+Vue.use(VueCordova, {
+  optionTestKey: 'optionTestValue'
+})
+console.log(VueCordova);
 Vue.config.productionTip = false
+
+if (window.location.protocol === 'file:' || window.location.port === '3000') {
+  var cordovaScript = document.createElement('script')
+  cordovaScript.setAttribute('type', 'text/javascript')
+  cordovaScript.setAttribute('src', 'cordova.js')
+  document.body.appendChild(cordovaScript)
+}
 
 Vue.http.interceptors.push(function(request, next) {
   request.method = 'POST';

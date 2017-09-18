@@ -3,309 +3,104 @@
     <f7-navbar title=" " back-link="预约会议室" sliding></f7-navbar>
     <f7-block>
       <div class="timeTab">
-        <a href="#tab1" class="tab-link active">
-            <p>今天</p>
-            <p>2017.8.10</p>
-        </a>
-        <a href="#tab2" class="tab-link">
-            <p>明天</p>
-            <p>2017.8.11</p>
-        </a>
-        <a href="#tab3" class="tab-link">
-            <p>后天</p>
-            <p>2017.8.12</p>
+        <a :href="'#tab'+(index+1)" class="tab-link" :class="index === 0?'active':''" v-for="(item,index) in todayName" @click="changeDate(item)">
+            <p>{{item.Tname}}</p>
+            <p>{{item.date}}</p>
         </a>
       </div>
       <div class="blank"></div>
       <div class="subscribe">
         <f7-tabs>
           <f7-tab id="tab1" active>
-            <div class="timeBox padding-l-r">
-              <div class="head fn-clear">
-                <div class="left">
-                  <h3>1号会议室</h3>
-                  <ul class="fn-clear">
-                    <li>LED</li>
-                    <li>扬声器</li>
-                    <li>扬声器</li>
-                  </ul>
+            <div class="timeBox" v-for="item in roomList">
+              <div class="padding-l-r"> 
+                <div class="head fn-clear">
+                  <div class="left">
+                    <h3>{{item.room.roomName}}</h3>
+                    <ul class="fn-clear">
+                      <li v-for="tag in (item.room.equipment).split(',')">{{tag}}</li>
+                    </ul>
+                  </div>
+                  <div class="right">
+                    <p>容纳人数:<span>{{item.room.roomNum}}</span>人</p>
+                    <a :href="'/atOnceorder?dateName='+dateName+'&roomId='+item.roomId+'&room='+item.room.roomName+'&thisDate='+thisDate">立即预约 ></a>
+                  </div>
                 </div>
-                <div class="right">
-                  <p>容纳人数:<span>26</span>人</p>
-                  <a href="/atOnceorder">立即预约 ></a>
-                </div>
-              </div>
-              <div class="timeBody">
-                <div class="row">
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
+                <div class="timeBody">
+                  <div class="row">
+                    <div class="col-20" v-for="room in item.makeList">
+                      <div class="box" :class="(room.status == 0)?'empty':'reserve'">
+                        <div class="text" v-if="room.status == 0">空</div>
+                        <div class="text" v-else>已满</div>
+                        <div class="T"> {{room.startTime}}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="blank"></div>
-            <div class="timeBox padding-l-r">
-              <div class="head fn-clear">
-                <div class="left">
-                  <h3>2号会议室</h3>
-                  <ul class="fn-clear">
-                    <li>LED</li>
-                    <li>扬声器</li>
-                    <li>扬声器</li>
-                  </ul>
-                </div>
-                <div class="right">
-                  <p>容纳人数:<span>26</span>人</p>
-                  <span class="Ym">已满</span>
-                </div>
-              </div>
-              <div class="timeBody">
-                <div class="row">
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                    <div class="box full">
-                      <div class="text">已满</div>
-                      <div class="T"> 9:00</div>
-                    </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box full">
-                        <div class="text">已满</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box empty">
-                        <div class="text">空</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                  <div class="col-20">
-                      <div class="box reserve">
-                        <div class="text">已订</div>
-                        <div class="T"> 9:00</div>
-                      </div>
-                  </div>
-                </div>
-              </div>
+              <div class="blank"></div>
             </div>
           </f7-tab>
-          <f7-tab id="tab2">Tab 2 content...</f7-tab>
-          <f7-tab id="tab3">Tab 3 content...</f7-tab>
+          <f7-tab id="tab2">
+            <div class="timeBox" v-for="item in roomList">
+              <div class="padding-l-r"> 
+                <div class="head fn-clear">
+                  <div class="left">
+                    <h3>{{item.room.roomName}}</h3>
+                    <ul class="fn-clear">
+                      <li v-for="tag in (item.room.equipment).split(',')">{{tag}}</li>
+                    </ul>
+                  </div>
+                  <div class="right">
+                    <p>容纳人数:<span>{{item.room.roomNum}}</span>人</p>
+                    <a :href="'/atOnceorder?dateName='+dateName+'&roomId='+item.roomId+'&room='+item.room.roomName+'&thisDate='+thisDate">立即预约 ></a>
+                  </div>
+                </div>
+                <div class="timeBody">
+                  <div class="row">
+                    <div class="col-20" v-for="room in item.makeList">
+                      <div class="box" :class="(room.status == 0)?'empty':'reserve'">
+                        <div class="text" v-if="room.status == 0">空</div>
+                        <div class="text" v-else>已满</div>
+                        <div class="T"> {{room.startTime}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="blank"></div>
+            </div>
+          </f7-tab>
+          <f7-tab id="tab3">
+            <div class="timeBox" v-for="item in roomList">
+              <div class="padding-l-r"> 
+                <div class="head fn-clear">
+                  <div class="left">
+                    <h3>{{item.room.roomName}}</h3>
+                    <ul class="fn-clear">
+                      <li v-for="tag in (item.room.equipment).split(',')">{{tag}}</li>
+                    </ul>
+                  </div>
+                  <div class="right">
+                    <p>容纳人数:<span>{{item.room.roomNum}}</span>人</p>
+                    <a :href="'/atOnceorder?dateName='+dateName+'&roomId='+item.roomId+'&room='+item.room.roomName+'&thisDate='+thisDate">立即预约 ></a>
+                  </div>
+                </div>
+                <div class="timeBody">
+                  <div class="row">
+                    <div class="col-20" v-for="room in item.makeList">
+                      <div class="box" :class="(room.status == 0)?'empty':'reserve'">
+                        <div class="text" v-if="room.status == 0">空</div>
+                        <div class="text" v-else>已满</div>
+                        <div class="T"> {{room.startTime}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="blank"></div>
+            </div>
+          </f7-tab>
         </f7-tabs>
       </div>
     </f7-block>
@@ -313,14 +108,60 @@
 </template>
 
 <script>
+import { config } from '../../assets/config.js'
+import utils from '../../assets/utils.js'
   export default{
     name:'meetingRoom',
     data:function(){
       return{
-
+        config:config,
+        roomList:[],
+        dateName:'今天',
+        thisDate:(new Date()).getFullYear() +'-' + ((new Date()).getMonth() + 1) +'-'+ (new Date()).getDate(),
+        todayName:[
+          {
+            Tname:'今天',
+            date:(new Date()).getFullYear() +'-' + ((new Date()).getMonth() + 1) +'-'+ (new Date()).getDate()
+          },
+          {
+            Tname:'明天',
+            date:(new Date()).getFullYear() +'-' + ((new Date()).getMonth() + 1) +'-'+ ((new Date()).getDate() + 1)
+          },
+          {
+            Tname:'后天',
+            date:(new Date()).getFullYear() +'-' + ((new Date()).getMonth() + 1) +'-'+ ((new Date()).getDate() + 2)
+          },
+        ]
       }
     },
+    mounted(){
+      this.$nextTick(function(){
+          this.getTodayRoom()
+      })
+    },
+    methods:{
+      getTodayRoom(){
+        this.$http.post(this.config.domin + 'nengtou/app/roomdate/list?theDate=' + (new Date()).getFullYear() +'-' + ((new Date()).getMonth() + 1) +'-'+ (new Date()).getDate()).then(response =>{
+            if(response.status === 200 && response.ok){
+              console.log(response);
+              this.roomList = response.body.rows
+            }
+        },(response) =>{
 
+        })
+      },
+      changeDate(item){
+        this.dateName = item.Tname;
+        this.thisDate = item.date
+        this.$http.post(this.config.domin + 'nengtou/app/roomdate/list?theDate=' + item.date).then(response =>{
+            if(response.status === 200 && response.ok){
+              this.roomList = response.body.rows
+            }
+        },(response) =>{
+
+        })
+      }
+    }
   }
 </script>
 
@@ -333,7 +174,7 @@
 }
 .meetingRoom .timeTab a{
   display: inline-block;
-  width:32.4%;
+  width:33.3%;
   text-align: center;
   color:#fff;
   font-size: .9rem;
@@ -342,12 +183,12 @@
 .meetingRoom .timeTab a.active{
   border-bottom: 4px solid rgba(255,255,255,.5);
 }
-.meetingRoom .subscribe .timeBox {
+/*.meetingRoom .subscribe .timeBox {
   padding: 15px
-}
+}*/
 .meetingRoom .subscribe .timeBox .head{
   border-bottom: 1px solid #e4e4e4;
-  padding-bottom: 10px;
+  padding: 15px 0;
 }
 .meetingRoom .subscribe .timeBox .head .left{
   float: left;

@@ -62,7 +62,7 @@
           <div class="img"><img :src="item.imgUrl"></div>
           <p class="time fn-clear">
             <span>{{item.createtime | changeDate}}</span>
-            <span>浏览量：2302人</span>
+            <span>浏览量：{{item.browser}}人</span>
           </p>
         </f7-link>
       </div>
@@ -139,6 +139,7 @@ import utils from '../assets/utils.js'
       getNewsList(){
         this.$http.post(this.config.domin + 'nengtou/app/news/list?page=0&pagesize=10').then(response =>{
           if(response.status === 200 && response.ok){
+            console.log(response);
             this.newsList = response.body.rows
           }else{
             self.f7.alert('',response.body.msg);

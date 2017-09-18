@@ -17,7 +17,7 @@
             <div class="padding-l-r">
               <div class="left">
                 <div class="head">
-                  <img src="../../static/imgs/timg.jpg">
+                  <img :src="item.userImgUrl">
                 </div>
               </div>
               <div class="right">
@@ -33,12 +33,11 @@
                 </div>
                 <div class="time-F fn-clear">
                   <span>{{item.createtime | JLDate}}</span>
-                  <i @click="handle"><img src="../../static/imgs/icon/hf.png"></i>
+                  <i @click="handle(item)"><img src="../../static/imgs/icon/hf.png"></i>
                 </div>
                 <div class="reply" v-if="item.childList !== undefined">
                   <div class="box">
-                    <p v-for="reply in item.childList"><span>{{reply.userName}}</span>：{{item.content}}</p>
-                    <!-- <p><span>周云</span>：我想要啊，说话算数的我想要啊，说话算数的。我想要啊，说话算数的。我想要啊，说话算数的</p> -->
+                    <p v-for="reply in item.childList"><span>{{reply.userName}}</span>：{{reply.content}}</p>
                   </div>
                   <i></i>
                 </div>
@@ -46,7 +45,7 @@
             </div>
         </div>
         <div class="replyBox">
-           <f7-messagebar placeholder="" send-link="发送" @submit="onSubmit" v-model="message" :class="message.length > 0 ?'btnStyle':''"></f7-messagebar>
+           <f7-messagebar placeholder="" send-link="发送" @submit="onSubmit()" v-model="message" :class="message.length > 0 ?'btnStyle':''"></f7-messagebar>
         </div>
       </div>
     </f7-block>
@@ -91,7 +90,9 @@ import utils from '../assets/utils.js'
      })
     },
     methods:{
-      handle(){
+      handle(item){
+        this.$store.commit('parentId',item.id);
+        this.message = ' ';
         var buttons = [
         {
           text:'评论',
@@ -100,12 +101,16 @@ import utils from '../assets/utils.js'
             var DomT = document.querySelector('.replyBox');
             var DomTextarea = document.querySelector('.replyBox .messagebar .toolbar-inner textarea');
             DomT.style.display = 'block';
+            // this.message = null;
             DomTextarea.focus();
           }
         },
         {
          text:'删除',
-         color:'red' 
+         color:'red',
+         onClick:function(){
+          alert(333);
+         }
         },
         {
          text:'取消',
@@ -115,7 +120,18 @@ import utils from '../assets/utils.js'
         self.f7.actions(buttons)
       },
       onSubmit(){
-        console.log(this.message.length);
+        var DomT = document.querySelector('.replyBox');
+        this.$http.post(this.config.domin + 'nengtou/app/interactionuser/save?content='+this.message+'&parentId='+this.$store.state.parentId).then(response =>{
+            if(response.status === 200 && response.ok){
+              DomT.style.display = 'none';
+              this.getInteractList();
+              this.$nextTick(function(){
+                this.message = '';
+              })
+            }
+        },(response) =>{
+
+        })
       },
       getInteractList(){
         // self.f7.showPreloader(' ');
@@ -123,7 +139,8 @@ import utils from '../assets/utils.js'
             if(response.status === 200 && response.ok){
               console.log(response);
               // self.f7.hidePreloader();
-              this.interactList = response.body.rows
+              this.interactList = response.body.rows;
+
             }else{
               self.f7.alert('',response.body.msg);
             }

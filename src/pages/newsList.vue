@@ -12,7 +12,7 @@
             <div class="img"><img :src="item.imgUrl"></div>
             <p class="time fn-clear">
               <span>{{item.createtime | changeDate}}</span>
-              <span>浏览量：2302人</span>
+              <span>浏览量：{{item.browser}}人</span>
             </p>
           </f7-link>
         </div>

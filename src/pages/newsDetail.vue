@@ -1,16 +1,16 @@
 <template>
   <f7-page class="newsDetail" navbar-fixed>
-    <f7-navbar title=" " back-link="园区最新通告在这里查看" sliding></f7-navbar>
+    <f7-navbar title=" " back-link="新闻详情" sliding></f7-navbar>
     <f7-block>
       <div class="blank"></div>
       <div class="detailBox">
-        <h2>园区最新通告在这里查看园区最新通告在这里查看!</h2>
-        <span>撰稿人：张小龙</span>
-        <span>2017-8-10</span>
-        <div class="content">
-          <p>Vue.js（读音 /vjuː/，类似于 view） 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面</p>
+        <h2>{{newsDetail.title}}</h2>
+        <span>撰稿人：{{newsDetail.operName}}</span>
+        <span>{{newsDetail.createtime | changeDate}}</span>
+        <div class="content" v-html="newsDetail.newsContent">
+          <!-- <p>Vue.js（读音 /vjuː/，类似于 view） 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面</p>
           <img src="../../static/imgs/banner.png">
-          <p>Vue.js（读音 /vjuː/，类似于 view） 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面</p>
+          <p>Vue.js（读音 /vjuː/，类似于 view） 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面</p> -->
         </div>
       </div>
     </f7-block>
@@ -26,6 +26,7 @@ export default {
     return{
       config:config,
       newsId:0,
+      newsDetail:''
     }
   },
   mounted(){
@@ -34,14 +35,21 @@ export default {
       this.getNewsDetail();
     })
   },
+
+ filters:{
+    changeDate(time){
+        var time = utils.fomatDate(time);
+        return time ;
+    }
+  },
+
   methods:{
     getNewsDetail(){
-      // self.f7.showPreloader(' ');
+      self.f7.showPreloader(' ');
       this.$http.post(this.config.domin + 'nengtou/app/news/detail?id='+this.newsId).then(response =>{
           if(response.status === 200 && response.ok){
-            console.log(response);
-            // self.f7.hidePreloader();
-            this.newsList = response.body.rows
+            self.f7.hidePreloader();
+            this.newsDetail = response.body.data
           }else{
             self.f7.alert('',response.body.msg);
           }
